@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verifikasi Sertifikat - Mentora.id</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap");
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: #f7f7f7;
+        color: #3c3c3c;
+      }
+      .glass-panel {
+        background: white;
+        border-radius: 20px;
+        border: 2px solid #e5e5e5;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-4">
+    <div
+      id="result-container"
+      class="w-full max-w-md glass-panel p-8 text-center shadow-lg"
+    >
+      <div class="text-4xl text-[#1cb0f6] mb-4">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+      </div>
+      <h2 class="text-2xl font-extrabold text-gray-800">
+        Memverifikasi Sertifikat...
+      </h2>
+      <p class="text-gray-500 mt-2">Mohon tunggu sebentar.</p>
+    </div>
+
+    <script>
+      // GANTI DENGAN URL API ANDA YANG TERBARU
+      const GOOGLE_SHEETS_API_URL =
+        "https://script.google.com/macros/s/AKfycbwzGfSW3kOdR_IP2EGOlrGCOgqtwDvGD8a4deabwVwmwRrdRfo3Wgpz4HM4K6jOxXWssg/exec";
+
+      window.onload = async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const certId = urlParams.get("id");
+        const container = document.getElementById("result-container");
+
+        if (!certId) {
+          container.innerHTML = `
+                    <div class="text-6xl text-red-500 mb-4"><i class="fa-solid fa-qrcode"></i></div>
+                    <h2 class="text-2xl font-extrabold text-gray-800">Sertifikat Tidak Ditemukan</h2>
+                    <p class="text-gray-500 mt-2 font-bold">Harap gunakan QR Code yang valid untuk memindai.</p>
+                `;
+          return;
+        }
+
+        try {
+          // Fetch menggunakan metode GET biasa untuk endpoint validateCert
+          const response = await fetch(
+            `${GOOGLE_SHEETS_API_URL}?action=validateCert&id=${certId}`,
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+          }
+
+          // Cek apakah response benar-benar JSON (untuk menghindari error 'Unexpected token')
+          const contentType = response.headers.get("content-type");
+          if (!contentType || !contentType.includes("application/json")) {
+            throw new Error(
+              "Server tidak mengembalikan format JSON. Pastikan kode Apps Script sudah di-Deploy ulang.",
+            );
+          }
+
+          const data = await response.json();
+
+          if (data.status === "error") {
+            throw new Error(data.message);
+          }
+
+          if (data.valid) {
+            container.innerHTML = `
+                        <div class="text-6xl text-[#58cc02] mb-4"><i class="fa-solid fa-shield-check"></i></div>
+                        <h2 class="text-3xl font-extrabold text-gray-800 mb-2">VERIFIED</h2>
+                        <p class="text-gray-500 font-bold mb-6">Sertifikat resmi diterbitkan oleh Mentora.id.</p>
+                        
+                        <div class="bg-gray-50 p-5 rounded-xl border-2 border-gray-200 text-left relative overflow-hidden">
+                            <div class="absolute -right-4 -bottom-4 text-gray-200 text-6xl opacity-30"><i class="fa-solid fa-award"></i></div>
+                            <p class="text-sm text-gray-400 font-bold mb-1">Diberikan Kepada:</p>
+                            <p class="font-extrabold text-xl text-gray-800 mb-2 relative z-10">${data.name}</p>
+                            
+                            <p class="text-sm text-gray-400 font-bold mb-1">Asal Sekolah/Instansi:</p>
+                            <p class="font-bold text-gray-700 mb-4 relative z-10">${data.school}</p>
+                            
+                            <div class="bg-white inline-block px-4 py-2 rounded-lg border border-gray-200 shadow-sm relative z-10">
+                                <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Total Skor</p>
+                                <p class="font-black text-3xl text-[#1cb0f6] leading-none">${data.score} <span class="text-base text-gray-400 font-bold">/ 100</span></p>
+                            </div>
+                        </div>
+                    `;
+          } else {
+            container.innerHTML = `
+                        <div class="text-6xl text-red-500 mb-4"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <h2 class="text-2xl font-extrabold text-gray-800">Sertifikat Palsu</h2>
+                        <p class="text-gray-500 mt-2 font-bold">ID Sertifikat <span class="text-gray-800">(${certId})</span> tidak terdaftar di sistem kami.</p>
+                    `;
+          }
+        } catch (e) {
+          console.error(e);
+          container.innerHTML = `
+                    <div class="text-4xl text-orange-500 mb-4"><i class="fa-solid fa-wifi"></i></div>
+                    <h2 class="text-xl font-extrabold text-gray-800">Koneksi Terputus</h2>
+                    <p class="text-gray-500 mt-2 font-bold text-sm bg-orange-50 p-3 rounded-lg border border-orange-200 text-left">${e.message}</p>
+                `;
+        }
+      };
+    </script>
+  </body>
+</html>

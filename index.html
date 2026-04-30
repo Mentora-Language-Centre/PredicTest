@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TOEFL Prediction Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: #ffffff;
+        color: #3c3c3c;
+      }
+      .btn-chunky {
+        transition: all 0.1s;
+        border-bottom-width: 4px;
+      }
+      .btn-chunky:active {
+        transform: translateY(4px);
+        border-bottom-width: 0px;
+        margin-top: 4px;
+      }
+      .btn-chunky:disabled {
+        background-color: #e5e5e5;
+        color: #afafaf;
+        border-color: #cecece;
+        cursor: not-allowed;
+        transform: none;
+        border-bottom-width: 4px;
+        margin-top: 0;
+      }
+      .btn-primary {
+        background-color: #58cc02;
+        border-color: #58a700;
+        color: white;
+      }
+      .btn-primary:hover:not(:disabled) {
+        background-color: #61e002;
+      }
+      .btn-secondary {
+        background-color: #1cb0f6;
+        border-color: #1899d6;
+        color: white;
+      }
+      .btn-secondary:hover:not(:disabled) {
+        background-color: #1fc1ff;
+      }
+      .btn-outline {
+        background-color: white;
+        border: 2px solid #e5e5e5;
+        border-bottom-width: 4px;
+        color: #3c3c3c;
+      }
+      .btn-outline:hover:not(:disabled) {
+        background-color: #f7f7f7;
+        border-color: #e5e5e5;
+      }
+      .btn-outline.selected {
+        border-color: #1cb0f6;
+        background-color: #ddf4ff;
+        color: #1cb0f6;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col relative">
+    <header
+      class="w-full border-b-2 border-gray-200 py-4 px-6 flex justify-between items-center bg-white sticky top-0 z-50"
+    >
+      <div
+        class="text-2xl font-extrabold text-[#58cc02] tracking-wider flex items-center gap-2"
+      >
+        <i class="fa-solid fa-graduation-cap"></i> PREDICTEST
+      </div>
+      <div id="nav-user" class="font-bold text-gray-500 hidden"></div>
+    </header>
+
+    <main
+      id="app-content"
+      class="flex-grow flex flex-col items-center justify-center p-4 w-full max-w-4xl mx-auto"
+    ></main>
+
+    <script>
+      // GANTI URL API INI
+      const GOOGLE_SHEETS_API_URL =
+        "https://script.google.com/macros/s/AKfycbwzGfSW3kOdR_IP2EGOlrGCOgqtwDvGD8a4deabwVwmwRrdRfo3Wgpz4HM4K6jOxXWssg/exec";
+      const TEST_DURATION_SECONDS = 90 * 60;
+
+      let state = {
+        view: "login",
+        currentUser: null,
+        timerInterval: null,
+        timeLeft: TEST_DURATION_SECONDS,
+        questions: [],
+        currentQuestionIndex: 0,
+        answers: {},
+        isSubmitting: false,
+        finalScore: null,
+      };
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      function render() {
+        const appContent = document.getElementById("app-content");
+        const navUser = document.getElementById("nav-user");
+
+        if (state.currentUser) {
+          navUser.innerHTML = `<i class="fa-regular fa-user mr-2"></i> ${state.currentUser.name}`;
+          navUser.classList.remove("hidden");
+        } else {
+          navUser.classList.add("hidden");
+        }
+
+        appContent.innerHTML = "";
+        switch (state.view) {
+          case "login":
+            appContent.innerHTML = getLoginHTML();
+            break;
+          case "register":
+            appContent.innerHTML = getRegisterHTML();
+            break;
+          case "pending":
+            appContent.innerHTML = getPendingHTML();
+            break;
+          case "dashboard":
+            appContent.innerHTML = getDashboardHTML();
+            break;
+          case "loading_test":
+            appContent.innerHTML = getLoadingHTML("Memproses...");
+            break;
+          case "test":
+            appContent.innerHTML = getTestHTML();
+            renderCurrentQuestion();
+            break;
+          case "completed":
+            appContent.innerHTML = getCompletedHTML();
+            break;
+        }
+      }
+      function setView(viewName) {
+        state.view = viewName;
+        render();
+      }
+
+      async function handleRegister(e) {
+        e.preventDefault();
+        const name = document.getElementById("reg-name").value;
+        const email = document.getElementById("reg-email").value;
+        const password = document.getElementById("reg-password").value;
+        const school = document.getElementById("reg-school").value;
+
+        setView("loading_test");
+        const regData = {
+          action: "registerUser",
+          timestamp: new Date().toISOString(),
+          name,
+          email,
+          password,
+          school,
+          status: "nonaktif",
+        };
+
+        try {
+          const response = await fetch(GOOGLE_SHEETS_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(regData),
+          });
+          if (!response.ok) throw new Error("HTTP Error");
+          const result = await response.json();
+          if (result.status === "success") {
+            alert("Pendaftaran berhasil! Tunggu diaktifkan admin.");
+            setView("login");
+          } else {
+            alert("Gagal: " + result.message);
+            setView("register");
+          }
+        } catch (error) {
+          alert("Error koneksi server.");
+          setView("register");
+        }
+      }
+
+      async function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById("log-email").value;
+        const password = document.getElementById("log-password").value;
+        setView("loading_test");
+
+        try {
+          const response = await fetch(GOOGLE_SHEETS_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({ action: "loginUser", email, password }),
+          });
+          const result = await response.json();
+
+          if (result.status === "success") {
+            state.currentUser = result.user;
+            if (result.user.status === "completed") {
+              state.currentUser = null;
+              alert("Anda sudah tes. Tidak bisa login lagi.");
+              setView("login");
+            } else if (result.user.status === "nonaktif") {
+              setView("pending");
+            } else if (result.user.status === "aktif") {
+              setView("dashboard");
+            }
+          } else {
+            alert("Gagal Masuk: " + result.message);
+            setView("login");
+          }
+        } catch (error) {
+          alert("Error koneksi.");
+          setView("login");
+        }
+      }
+
+      function handleLogout() {
+        state.currentUser = null;
+        setView("login");
+      }
+
+      async function fetchQuestionsFromSheet() {
+        try {
+          const response = await fetch(
+            GOOGLE_SHEETS_API_URL + "?action=getQuestions",
+          );
+          const data = await response.json();
+          if (data.status === "success") return data.data;
+          else throw new Error("Format salah");
+        } catch (error) {
+          return [
+            {
+              id: "err",
+              type: "reading_comp",
+              section: "Error",
+              instruction: "Error",
+              text: "Gagal muat soal.",
+              question: "-",
+              options: ["OK"],
+            },
+          ];
+        }
+      }
+
+      async function startTest() {
+        setView("loading_test");
+        let fetched = await fetchQuestionsFromSheet();
+        state.questions = shuffleArray(fetched);
+        state.questions.forEach((q) => {
+          if (q.options && Array.isArray(q.options))
+            q.options = shuffleArray([...q.options]);
+          if (q.words && Array.isArray(q.words))
+            q.words = shuffleArray([...q.words]);
+        });
+        state.currentQuestionIndex = 0;
+        state.answers = {};
+        state.timeLeft = TEST_DURATION_SECONDS;
+        setView("test");
+        state.timerInterval = setInterval(() => {
+          state.timeLeft--;
+          updateTimerDisplay();
+          if (state.timeLeft <= 0) {
+            clearInterval(state.timerInterval);
+            finishAndSubmitTest();
+          }
+        }, 1000);
+      }
+
+      function formatTime(seconds) {
+        const m = Math.floor(seconds / 60)
+          .toString()
+          .padStart(2, "0");
+        const s = (seconds % 60).toString().padStart(2, "0");
+        return `${m}:${s}`;
+      }
+
+      function updateTimerDisplay() {
+        const timerEl = document.getElementById("test-timer");
+        if (timerEl) {
+          timerEl.textContent = formatTime(state.timeLeft);
+          if (state.timeLeft < 300) timerEl.classList.add("text-red-500");
+        }
+      }
+
+      function playAudio(text) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(text);
+          u.lang = "en-US";
+          u.rate = 0.9;
+          window.speechSynthesis.speak(u);
+        } else {
+          alert("Browser tidak support audio.");
+        }
+      }
+
+      function toggleVocabWord(word, btn) {
+        if (!state.answers[state.currentQuestionIndex])
+          state.answers[state.currentQuestionIndex] = [];
+        const ansArr = state.answers[state.currentQuestionIndex];
+        const i = ansArr.indexOf(word);
+        if (i > -1) {
+          ansArr.splice(i, 1);
+          btn.classList.remove("selected");
+        } else {
+          ansArr.push(word);
+          btn.classList.add("selected");
+        }
+        checkNextButtonState();
+      }
+
+      function setAnswer(val) {
+        state.answers[state.currentQuestionIndex] = val;
+        checkNextButtonState();
+      }
+
+      function checkNextButtonState() {
+        const nextBtn = document.getElementById("btn-next");
+        const ans = state.answers[state.currentQuestionIndex];
+        const q = state.questions[state.currentQuestionIndex];
+        let hasAnswer = false;
+        if (q.type === "reading_vocab") hasAnswer = true;
+        else if (Array.isArray(ans) || typeof ans === "string")
+          hasAnswer = ans.length > 0;
+        if (nextBtn)
+          nextBtn.disabled = !hasAnswer && q.type !== "reading_vocab";
+      }
+
+      function goNextQuestion() {
+        if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+        const q = state.questions[state.currentQuestionIndex];
+        if (q.type === "listening_dictation" || q.type.startsWith("writing_")) {
+          const ta = document.getElementById("text-answer");
+          if (ta) setAnswer(ta.value);
+        }
+        if (state.currentQuestionIndex < state.questions.length - 1) {
+          state.currentQuestionIndex++;
+          renderCurrentQuestion();
+        } else {
+          finishAndSubmitTest();
+        }
+      }
+
+      async function finishAndSubmitTest() {
+        clearInterval(state.timerInterval);
+        state.isSubmitting = true;
+        setView("loading_test");
+        document.getElementById("loading-text").textContent =
+          "Server sedang menilai ujian Anda...";
+
+        let finalResults = [];
+        state.questions.forEach((q, index) => {
+          finalResults.push({
+            id_soal: q.id,
+            section: q.section,
+            type: q.type,
+            jawaban_user: state.answers[index] || null,
+          });
+        });
+
+        const testData = {
+          action: "submitTest",
+          timestamp: new Date().toISOString(),
+          user_email: state.currentUser.email,
+          user_name: state.currentUser.name,
+          user_school: state.currentUser.school,
+          time_taken_seconds: TEST_DURATION_SECONDS - state.timeLeft,
+          answers: JSON.stringify(finalResults),
+        };
+
+        try {
+          const response = await fetch(GOOGLE_SHEETS_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(testData),
+          });
+          const result = await response.json();
+          if (result.status === "success") {
+            state.finalScore = result.score; // Menangkap skor dari server
+          }
+        } catch (error) {
+          console.error(error);
+        } finally {
+          state.isSubmitting = false;
+          state.currentUser = null;
+          setView("completed");
+        }
+      }
+
+      function getLoadingHTML(text) {
+        return `<div class="flex flex-col items-center justify-center h-64"><i class="fa-solid fa-circle-notch fa-spin text-5xl text-[#1cb0f6] mb-6"></i><h3 id="loading-text" class="text-xl font-bold text-gray-700">${text}</h3></div>`;
+      }
+
+      function getLoginHTML() {
+        return `<div class="w-full max-w-md bg-white rounded-2xl border-2 border-gray-200 p-8 shadow-sm"><div class="text-center mb-8"><h2 class="text-3xl font-extrabold text-gray-800">Masuk</h2></div><form onsubmit="handleLogin(event)" class="space-y-4"><div><input type="email" id="log-email" required placeholder="Email" class="w-full px-4 py-3 bg-gray-100 border-2 border-transparent focus:border-[#1cb0f6] focus:bg-white rounded-xl outline-none font-semibold"></div><div><input type="password" id="log-password" required placeholder="Kata Sandi" class="w-full px-4 py-3 bg-gray-100 border-2 border-transparent focus:border-[#1cb0f6] focus:bg-white rounded-xl outline-none font-semibold"></div><button type="submit" class="w-full btn-chunky btn-secondary py-3 rounded-2xl font-bold text-lg uppercase tracking-wide">MASUK</button></form><div class="mt-6 text-center"><p class="text-gray-500 font-bold">Belum punya akun? <a href="#" onclick="setView('register')" class="text-[#1cb0f6] hover:underline">DAFTAR</a></p></div></div>`;
+      }
+
+      function getRegisterHTML() {
+        return `<div class="w-full max-w-md bg-white rounded-2xl border-2 border-gray-200 p-8 shadow-sm"><div class="text-center mb-6"><h2 class="text-3xl font-extrabold text-gray-800">Buat Profil</h2></div><form onsubmit="handleRegister(event)" class="space-y-4"><div><input type="text" id="reg-name" required placeholder="Nama Lengkap" class="w-full px-4 py-3 bg-gray-100 border-2 border-transparent focus:border-[#1cb0f6] focus:bg-white rounded-xl outline-none font-semibold"></div><div><input type="email" id="reg-email" required placeholder="Email" class="w-full px-4 py-3 bg-gray-100 border-2 border-transparent focus:border-[#1cb0f6] focus:bg-white rounded-xl outline-none font-semibold"></div><div><input type="text" id="reg-school" required placeholder="Asal Sekolah / Universitas" class="w-full px-4 py-3 bg-gray-100 border-2 border-transparent focus:border-[#1cb0f6] focus:bg-white rounded-xl outline-none font-semibold"></div><div><input type="password" id="reg-password" required placeholder="Kata Sandi" class="w-full px-4 py-3 bg-gray-100 border-2 border-transparent focus:border-[#1cb0f6] focus:bg-white rounded-xl outline-none font-semibold"></div><button type="submit" class="w-full btn-chunky btn-primary py-3 rounded-2xl font-bold text-lg uppercase tracking-wide mt-2">DAFTAR</button></form><div class="mt-6 text-center"><p class="text-gray-500 font-bold">Sudah punya akun? <a href="#" onclick="setView('login')" class="text-[#1cb0f6] hover:underline">MASUK</a></p></div></div>`;
+      }
+
+      function getPendingHTML() {
+        return `<div class="w-full max-w-md text-center"><img src="https://img.icons8.com/color/150/000000/time-machine.png" alt="Pending" class="mx-auto mb-6 opacity-80"/><h2 class="text-2xl font-extrabold text-gray-800 mb-2">Menunggu Aktivasi</h2><p class="text-gray-500 font-semibold mb-8">Halo ${state.currentUser?.name}, akun berstatus <span class="text-orange-500 uppercase font-bold">Nonaktif</span>. Hubungi pengawas.</p><button onclick="handleLogout()" class="btn-chunky btn-outline py-3 px-8 rounded-2xl font-bold uppercase text-gray-600">KEMBALI KE LOGIN</button></div>`;
+      }
+
+      function getDashboardHTML() {
+        return `<div class="w-full max-w-2xl bg-white rounded-3xl border-2 border-gray-200 p-8 shadow-sm"><div class="flex items-center gap-4 mb-6 border-b-2 border-gray-100 pb-6"><div class="w-16 h-16 bg-[#ddf4ff] text-[#1cb0f6] rounded-full flex items-center justify-center text-3xl"><i class="fa-solid fa-user-graduate"></i></div><div><h2 class="text-2xl font-extrabold text-gray-800">Siap untuk tes, ${state.currentUser.name}?</h2></div></div><button onclick="startTest()" class="w-full btn-chunky btn-primary py-4 rounded-2xl font-bold text-xl uppercase tracking-wider">MULAI UJIAN</button></div>`;
+      }
+
+      // UPDATE: Menampilkan Skor Langsung
+      function getCompletedHTML() {
+        return `
+    <div class="w-full max-w-md text-center">
+        <div class="text-[80px] text-[#58cc02] mb-4"><i class="fa-solid fa-paper-plane"></i></div>
+        <h2 class="text-3xl font-extrabold text-gray-800 mb-4">Tes Terkirim!</h2>
+        <div class="bg-blue-50 border-2 border-blue-100 rounded-2xl p-6 mb-8 text-left">
+            <p class="text-gray-700 font-bold mb-2 text-center">Pemberitahuan:</p>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                Jawaban Anda sedang dalam proses peninjauan oleh tim penguji kami. 
+                Hasil skor akhir dan E-Certificate akan diumumkan melalui <strong>email terdaftar</strong> Anda segera setelah penilaian selesai.
+            </p>
+        </div>
+        <button onclick="handleLogout()" class="w-full btn-chunky btn-secondary py-3 rounded-2xl font-bold uppercase tracking-wide">Keluar</button>
+    </div>`;
+      }
+
+      function getTestHTML() {
+        const p = (state.currentQuestionIndex / state.questions.length) * 100;
+        return `<div class="w-full max-w-3xl flex flex-col h-full"><div class="flex items-center gap-4 mb-8"><div class="bg-gray-200 h-4 flex-grow rounded-full overflow-hidden"><div class="bg-[#58cc02] h-full transition-all duration-300" style="width: ${p}%"></div></div><div class="flex items-center gap-2 font-extrabold text-xl text-gray-700 bg-white px-4 py-2 rounded-2xl border-2 border-gray-200"><i class="fa-regular fa-clock text-[#ffc800]"></i> <span id="test-timer">${formatTime(state.timeLeft)}</span></div></div><div id="question-container" class="flex-grow flex flex-col mb-8"></div><div class="border-t-2 border-gray-200 pt-6 flex justify-between items-center"><div id="section-indicator" class="font-bold text-gray-400 uppercase tracking-wide text-sm">Soal ${state.currentQuestionIndex + 1} / ${state.questions.length}</div><button id="btn-next" onclick="goNextQuestion()" disabled class="btn-chunky btn-primary py-3 px-10 rounded-2xl font-bold text-lg uppercase tracking-wide">${state.currentQuestionIndex === state.questions.length - 1 ? "SELESAI" : "SELANJUTNYA"}</button></div></div>`;
+      }
+
+      function renderCurrentQuestion() {
+        const container = document.getElementById("question-container");
+        const sectionInd = document.getElementById("section-indicator");
+        if (!container) return;
+
+        const q = state.questions[state.currentQuestionIndex];
+        sectionInd.innerHTML = `<i class="fa-solid fa-layer-group mr-2"></i> <span class="text-[#1cb0f6] mr-4">${q.section}</span> Soal ${state.currentQuestionIndex + 1} / ${state.questions.length}`;
+
+        let html = `<h2 class="text-2xl font-extrabold text-gray-800 mb-6">${q.instruction}</h2>`;
+        const currentAns = state.answers[state.currentQuestionIndex];
+
+        switch (q.type) {
+          case "reading_vocab":
+            html += `<div class="grid grid-cols-2 sm:grid-cols-3 gap-4">`;
+            q.words.forEach((word) => {
+              const isSelected = currentAns && currentAns.includes(word);
+              html += `<button onclick="toggleVocabWord('${word}', this)" class="btn-outline py-4 px-2 rounded-2xl font-bold text-lg transition-all ${isSelected ? "selected" : ""}">${word}</button>`;
+            });
+            html += `</div>`;
+            break;
+          case "reading_fill":
+            html += `<div class="bg-gray-100 p-8 rounded-3xl border-2 border-gray-200 mb-6 text-center sm:text-left"><p class="text-xl font-semibold leading-relaxed text-gray-700">${q.text.replace("_____", `<span class="inline-block w-24 border-b-2 border-gray-400"></span>`)}</p></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-4">`;
+            q.options.forEach((opt) => {
+              const isSelected = currentAns === opt;
+              html += `<button onclick="setAnswer('${opt.replace(/'/g, "\\'")}'); renderCurrentQuestion();" class="btn-outline py-3 px-4 rounded-2xl font-bold text-lg text-left ${isSelected ? "selected" : ""}"><div class="flex items-center"><div class="w-6 h-6 rounded-full border-2 shrink-0 border-current flex items-center justify-center mr-3 ${isSelected ? "bg-current text-white" : ""}">${isSelected ? '<i class="fa-solid fa-check text-xs"></i>' : ""}</div><span>${opt}</span></div></button>`;
+            });
+            html += `</div>`;
+            break;
+          case "reading_comp":
+            html += `<div class="bg-blue-50 p-6 rounded-2xl border-2 border-blue-100 mb-6 max-h-48 overflow-y-auto"><p class="text-lg font-medium leading-relaxed text-gray-700 whitespace-pre-line">${q.text}</p></div><h3 class="text-xl font-bold text-gray-800 mb-4">${q.question}</h3><div class="space-y-3">`;
+            q.options.forEach((opt) => {
+              const isSelected = currentAns === opt;
+              html += `<button onclick="setAnswer('${opt.replace(/'/g, "\\'")}'); renderCurrentQuestion();" class="w-full btn-outline py-3 px-6 rounded-2xl font-bold text-lg text-left ${isSelected ? "selected" : ""}">${opt}</button>`;
+            });
+            html += `</div>`;
+            break;
+          case "listening_dictation":
+            html += `<div class="flex flex-col items-center mb-8"><button onclick="playAudio('${q.audioText.replace(/'/g, "\\'")}')" class="w-24 h-24 bg-[#1cb0f6] text-white rounded-full flex items-center justify-center shadow-[0_4px_0_#1899d6] active:shadow-[0_0px_0_#1899d6] active:translate-y-1 transition-all text-4xl mb-4 hover:bg-[#1fc1ff]"><i class="fa-solid fa-volume-high"></i></button><p class="text-gray-500 font-bold uppercase text-sm tracking-widest">Klik untuk memutar</p></div><textarea id="text-answer" oninput="setAnswer(this.value)" placeholder="Ketik apa yang Anda dengar di sini..." class="w-full h-32 p-4 bg-gray-100 border-2 border-gray-200 rounded-2xl outline-none focus:border-[#1cb0f6] focus:bg-white resize-none font-semibold text-lg text-gray-700 placeholder-gray-400">${currentAns || ""}</textarea>`;
+            break;
+          case "listening_select":
+            html += `<div class="flex items-center gap-6 mb-8 bg-gray-50 p-6 rounded-3xl border-2 border-gray-200"><button onclick="playAudio('${q.audioText.replace(/'/g, "\\'")}')" class="w-16 h-16 shrink-0 bg-[#58cc02] text-white rounded-full flex items-center justify-center shadow-[0_4px_0_#58a700] active:shadow-[0_0px_0_#58a700] active:translate-y-1 transition-all text-2xl hover:bg-[#61e002]"><i class="fa-solid fa-volume-high"></i></button><p class="text-gray-600 font-semibold">Dengarkan kata, lalu pilih ejaan yang tepat.</p></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-4">`;
+            q.options.forEach((opt) => {
+              const isSelected = currentAns === opt;
+              html += `<button onclick="setAnswer('${opt.replace(/'/g, "\\'")}'); renderCurrentQuestion();" class="btn-outline py-4 px-6 rounded-2xl font-bold text-lg ${isSelected ? "selected" : ""}">${opt}</button>`;
+            });
+            html += `</div>`;
+            break;
+          case "writing_image":
+            html += `<div class="mb-6 flex justify-center"><img src="${q.image}" alt="Soal Gambar" class="rounded-2xl max-h-64 object-cover border-4 border-gray-100 shadow-sm"></div><textarea id="text-answer" oninput="setAnswer(this.value)" placeholder="Tulis deskripsi Anda di sini..." class="w-full h-32 p-4 bg-gray-100 border-2 border-gray-200 rounded-2xl outline-none focus:border-[#1cb0f6] focus:bg-white resize-none font-semibold text-lg text-gray-700 placeholder-gray-400">${currentAns || ""}</textarea>`;
+            break;
+          case "writing_paragraph":
+            html += `<div class="bg-gray-100 p-6 rounded-2xl border-2 border-gray-200 mb-6"><p class="text-xl font-bold text-gray-800">${q.question}</p></div><textarea id="text-answer" oninput="setAnswer(this.value)" placeholder="Ketik jawaban Anda dalam bentuk paragraf..." class="w-full h-48 p-4 bg-gray-100 border-2 border-gray-200 rounded-2xl outline-none focus:border-[#1cb0f6] focus:bg-white resize-none font-semibold text-lg text-gray-700 placeholder-gray-400">${currentAns || ""}</textarea>`;
+            break;
+        }
+        container.innerHTML = html;
+        checkNextButtonState();
+      }
+      window.onload = () => {
+        render();
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Superadmin - Mentora.id</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;700;800&display=swap");
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: #f4f7f6;
+      }
+      .glass {
+        background: white;
+        border-radius: 24px;
+        border: 2px solid #e5e7eb;
+      }
+      .btn-chunky {
+        border-bottom-width: 4px;
+        transition: 0.1s;
+      }
+      .btn-chunky:active {
+        transform: translateY(4px);
+        border-bottom-width: 0;
+      }
+    </style>
+  </head>
+  <body class="p-8">
+    <!-- LOGIN ADMIN -->
+    <div id="admin-login" class="max-w-md mx-auto glass p-8 mt-20 text-center">
+      <h2 class="text-3xl font-extrabold text-gray-800 mb-6">
+        <i class="fa-solid fa-shield-halved text-[#1cb0f6]"></i> Superadmin
+      </h2>
+      <input
+        type="password"
+        id="admin-pw"
+        placeholder="Masukkan Password Admin"
+        class="w-full px-4 py-3 bg-gray-100 border-2 border-transparent focus:border-[#1cb0f6] focus:bg-white rounded-xl outline-none font-bold mb-4 text-center"
+      />
+      <button
+        onclick="loginAdmin()"
+        class="w-full btn-chunky bg-[#1cb0f6] border-[#1899d6] text-white py-3 rounded-xl font-bold uppercase tracking-wide"
+      >
+        Masuk
+      </button>
+    </div>
+
+    <!-- DASHBOARD ADMIN -->
+    <div id="admin-dashboard" class="max-w-6xl mx-auto hidden">
+      <header
+        class="flex justify-between items-center mb-10 glass p-6 shadow-sm"
+      >
+        <div class="text-2xl font-black text-[#1cb0f6] tracking-tighter">
+          MENTORA<span class="text-[#58cc02]">.ID</span> ADMIN
+        </div>
+        <div class="flex gap-4">
+          <button
+            onclick="loadData()"
+            class="btn-chunky bg-gray-100 border-gray-300 py-2 px-6 rounded-xl font-bold text-gray-600"
+          >
+            <i class="fa-solid fa-sync"></i> Refresh
+          </button>
+          <button
+            onclick="logoutAdmin()"
+            class="btn-chunky bg-red-100 border-red-300 text-red-600 py-2 px-6 rounded-xl font-bold"
+          >
+            <i class="fa-solid fa-power-off"></i> Keluar
+          </button>
+        </div>
+      </header>
+
+      <div class="glass p-8 shadow-sm overflow-x-auto">
+        <table class="w-full text-left">
+          <thead
+            class="text-gray-400 uppercase text-xs tracking-widest border-b-2"
+          >
+            <tr>
+              <th class="pb-4">Nama Siswa</th>
+              <th class="pb-4">Status</th>
+              <th class="pb-4">Skor</th>
+              <th class="pb-4 text-right">Tindakan</th>
+            </tr>
+          </thead>
+          <tbody id="siswa-table" class="divide-y"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal Review -->
+    <div
+      id="review-modal"
+      class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50"
+    >
+      <div
+        class="bg-white w-full max-w-2xl rounded-3xl p-8 max-h-[80vh] overflow-y-auto"
+      >
+        <h3 class="text-2xl font-bold mb-6">Peninjauan Jawaban Manual</h3>
+        <div id="review-content" class="space-y-6"></div>
+        <div class="mt-8 flex gap-4">
+          <button
+            onclick="submitFinalReview()"
+            class="flex-grow btn-chunky bg-[#58cc02] border-[#46a302] text-white py-3 rounded-2xl font-bold"
+          >
+            Finalisasi Skor
+          </button>
+          <button
+            onclick="closeModal()"
+            class="btn-chunky bg-gray-200 border-gray-300 py-3 px-8 rounded-2xl font-bold text-gray-700"
+          >
+            Batal
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // GANTI DENGAN URL API ANDA
+      const API_URL =
+        "https://script.google.com/macros/s/AKfycbwzGfSW3kOdR_IP2EGOlrGCOgqtwDvGD8a4deabwVwmwRrdRfo3Wgpz4HM4K6jOxXWssg/exec";
+      // GANTI DENGAN URL DIMANA ANDA MENGHOSTING FILE VALIDATE.HTML
+      const VALIDATE_BASE_URL =
+        "https://predictest.mentora.sch.id/validate.html";
+
+      let currentReviewingEmail = "";
+      let currentAutoCorrectCount = 0;
+
+      function loginAdmin() {
+        const pw = btoa(document.getElementById("admin-pw").value);
+        // Password baru: bismillah2026
+        if (pw === "YmlzbWlsbGFoMjAyNg==") {
+          document.getElementById("admin-login").classList.add("hidden");
+          document.getElementById("admin-dashboard").classList.remove("hidden");
+          loadData();
+        } else {
+          alert("Password Salah!");
+        }
+      }
+
+      function logoutAdmin() {
+        document.getElementById("admin-dashboard").classList.add("hidden");
+        document.getElementById("admin-login").classList.remove("hidden");
+        document.getElementById("admin-pw").value = "";
+      }
+
+      async function loadData() {
+        const table = document.getElementById("siswa-table");
+        table.innerHTML =
+          '<tr><td colspan="4" class="py-8 text-center text-gray-400"><i class="fa-solid fa-spinner fa-spin text-2xl"></i> Memuat data...</td></tr>';
+
+        try {
+          const res = await fetch(API_URL + "?action=getAdminData");
+          const data = await res.json();
+
+          table.innerHTML = "";
+          if (data.status === "success" && data.siswa.length > 0) {
+            data.siswa.reverse().forEach((s) => {
+              let action = "-";
+              let statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-gray-100 font-bold text-gray-600">${s.status}</span>`;
+              let scoreDisplay = `<span class="text-gray-400">-</span>`;
+
+              if (s.status === "nonaktif") {
+                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-orange-100 text-orange-600 font-bold">Menunggu</span>`;
+                action = `<button onclick="activate('${s.email}')" class="text-blue-500 font-bold hover:underline">Aktifkan</button>`;
+              } else if (s.status === "aktif") {
+                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-blue-100 text-blue-600 font-bold">Sedang Tes</span>`;
+              } else if (s.status === "waiting_review") {
+                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-purple-100 text-purple-600 font-bold">Perlu Review</span>`;
+                action = `<button onclick="openReview('${s.email}', '${s.name}')" class="btn-chunky bg-purple-500 border-purple-700 text-white px-4 py-2 rounded-xl font-bold text-sm">Review Jawaban</button>`;
+              } else if (s.status === "completed") {
+                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-green-100 text-green-600 font-bold">Selesai</span>`;
+                scoreDisplay = `<span class="font-black text-[#1cb0f6] text-xl">${s.score}</span>`;
+                action = `<button onclick="downloadCert('${encodeURIComponent(JSON.stringify(s))}')" class="text-green-500 font-bold hover:underline"><i class="fa-solid fa-download"></i> E-Cert</button>`;
+              }
+
+              table.innerHTML += `
+                        <tr class="py-4 hover:bg-gray-50 transition-colors">
+                            <td class="py-4 pl-2 font-bold text-gray-800">${s.name}<br><span class="text-xs font-normal text-gray-400">${s.email} • ${s.school}</span></td>
+                            <td class="py-4">${statusBadge}</td>
+                            <td class="py-4">${scoreDisplay}</td>
+                            <td class="py-4 pr-2 text-right">${action}</td>
+                        </tr>`;
+            });
+          } else {
+            table.innerHTML =
+              '<tr><td colspan="4" class="py-8 text-center text-gray-400">Belum ada data siswa.</td></tr>';
+          }
+        } catch (e) {
+          table.innerHTML =
+            '<tr><td colspan="4" class="py-8 text-center text-red-500">Gagal memuat data. Periksa URL API.</td></tr>';
+        }
+      }
+
+      async function activate(email) {
+        try {
+          await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({ action: "activateUser", email: email }),
+          });
+          loadData();
+        } catch (e) {
+          alert("Gagal mengaktifkan user.");
+        }
+      }
+
+      async function openReview(email, name) {
+        currentReviewingEmail = email;
+        document.getElementById("review-modal").classList.remove("hidden");
+        const content = document.getElementById("review-content");
+        content.innerHTML =
+          '<div class="text-center py-10 text-[#1cb0f6]"><i class="fa-solid fa-circle-notch fa-spin text-4xl mb-4"></i><p class="font-bold">Menganalisis jawaban otomatis...</p></div>';
+
+        try {
+          const qRes = await fetch(API_URL + "?action=getQuestions");
+          const qData = await qRes.json();
+          const aRes = await fetch(
+            API_URL + "?action=getDetailJawaban&email=" + email,
+          );
+          const aData = await aRes.json();
+
+          content.innerHTML = "";
+          currentAutoCorrectCount = 0;
+
+          qData.data.forEach((q) => {
+            // Cari jawaban user untuk soal ini
+            const userAnsObj = aData.data.find((ans) => ans.id_soal === q.id);
+            const userAns = userAnsObj ? userAnsObj.jawaban_user : null;
+
+            if (q.correct === "MANUAL") {
+              // Tampilkan untuk dinilai manual
+              content.innerHTML += `
+                        <div class="bg-gray-50 p-5 rounded-2xl border-2 border-gray-100">
+                            <p class="font-bold text-gray-500 text-sm mb-3">PERTANYAAN: ${q.instruction} ${q.question || ""}</p>
+                            <div class="bg-white p-4 rounded-xl border border-gray-200 mb-4 shadow-inner">
+                                <p class="text-gray-800 whitespace-pre-wrap">${userAns || '<span class="italic text-gray-400">[Tidak ada jawaban]</span>'}</p>
+                            </div>
+                            <div class="flex gap-6 border-t pt-4 border-gray-200">
+                                <label class="flex items-center gap-2 font-bold text-green-600 cursor-pointer">
+                                    <input type="radio" name="q_${q.id}" value="1" class="w-5 h-5 accent-green-600"> BENAR
+                                </label>
+                                <label class="flex items-center gap-2 font-bold text-red-600 cursor-pointer">
+                                    <input type="radio" name="q_${q.id}" value="0" checked class="w-5 h-5 accent-red-600"> SALAH
+                                </label>
+                            </div>
+                        </div>`;
+            } else {
+              // Hitung skor otomatis
+              if (q.correct) {
+                if (Array.isArray(q.correct)) {
+                  if (Array.isArray(userAns)) {
+                    if (
+                      q.correct.slice().sort().join(",") ===
+                      userAns.slice().sort().join(",")
+                    )
+                      currentAutoCorrectCount++;
+                  }
+                } else {
+                  if (userAns === q.correct) currentAutoCorrectCount++;
+                }
+              }
+            }
+          });
+
+          if (content.innerHTML === "") {
+            content.innerHTML =
+              '<p class="text-center text-gray-500">Tidak ada soal bertipe MANUAL untuk direview.</p>';
+          }
+        } catch (e) {
+          content.innerHTML =
+            '<p class="text-center text-red-500">Gagal memuat detail jawaban.</p>';
+        }
+      }
+
+      async function submitFinalReview() {
+        const inputs = document.querySelectorAll(
+          '#review-content input[type="radio"]:checked',
+        );
+        let manualScore = 0;
+        inputs.forEach((i) => (manualScore += parseInt(i.value)));
+
+        const totalCorrect = currentAutoCorrectCount + manualScore;
+
+        const btn = event.target;
+        const originalText = btn.innerHTML;
+        btn.innerHTML =
+          '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+        btn.disabled = true;
+
+        try {
+          await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({
+              action: "finalizeReview",
+              email: currentReviewingEmail,
+              totalCorrect: totalCorrect,
+            }),
+          });
+          closeModal();
+          loadData();
+        } catch (e) {
+          alert("Gagal memfinalisasi skor.");
+        } finally {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      }
+
+      function closeModal() {
+        document.getElementById("review-modal").classList.add("hidden");
+      }
+
+      function downloadCert(dataStr) {
+        const s = JSON.parse(decodeURIComponent(dataStr));
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = 1200;
+        canvas.height = 850;
+
+        // Background & Border Elegant
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, 1200, 850);
+        const grad = ctx.createLinearGradient(0, 0, 1200, 0);
+        grad.addColorStop(0, "#1cb0f6");
+        grad.addColorStop(1, "#58cc02");
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 30;
+        ctx.strokeRect(15, 15, 1170, 820);
+
+        // Watermark / Pattern
+        ctx.globalAlpha = 0.03;
+        ctx.fillStyle = "#1cb0f6";
+        for (let i = 0; i < 10; i++) {
+          for (let j = 0; j < 8; j++) {
+            ctx.font = "bold 30px Nunito";
+            ctx.fillText("MENTORA.ID", i * 180, j * 130);
+          }
+        }
+        ctx.globalAlpha = 1.0;
+
+        // Logo & Header
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#1cb0f6";
+        ctx.font = "900 28px Nunito";
+        ctx.fillText("MENTORA.ID PREDICTEST", 600, 110);
+
+        ctx.fillStyle = "#3c3c3c";
+        ctx.font = 'bold 70px "Playfair Display"';
+        ctx.fillText("Certificate of Achievement", 600, 230);
+
+        ctx.font = "24px Nunito";
+        ctx.fillStyle = "#777";
+        ctx.fillText("This certificate is proudly presented to", 600, 310);
+
+        // Nama Siswa
+        ctx.fillStyle = "#1cb0f6";
+        ctx.font = "900 65px Nunito";
+        ctx.fillText(s.name.toUpperCase(), 600, 400);
+
+        // Garis bawah nama
+        ctx.beginPath();
+        ctx.moveTo(350, 420);
+        ctx.lineTo(850, 420);
+        ctx.strokeStyle = "#e5e7eb";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = "#3c3c3c";
+        ctx.font = "22px Nunito";
+        ctx.fillText(
+          `For successfully completing the TOEFL Prediction Test`,
+          600,
+          470,
+        );
+        ctx.fillText(
+          `demonstrating outstanding English proficiency.`,
+          600,
+          505,
+        );
+
+        // Skor Gold Badge
+        ctx.fillStyle = "#FFD700";
+        ctx.beginPath();
+        ctx.arc(600, 620, 85, 0, Math.PI * 2);
+        ctx.fill();
+        // Inner circle
+        ctx.strokeStyle = "#fff";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(600, 620, 75, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = "#fff";
+        ctx.font = "900 50px Nunito";
+        ctx.fillText(s.score, 600, 638);
+        ctx.font = "bold 16px Nunito";
+        ctx.fillText("SCORE", 600, 585);
+
+        // Tanda Tangan (Dummy)
+        ctx.fillStyle = "#3c3c3c";
+        ctx.font = 'italic 40px "Playfair Display"';
+        ctx.fillText("Mentora.id", 300, 680);
+        ctx.beginPath();
+        ctx.moveTo(200, 710);
+        ctx.lineTo(400, 710);
+        ctx.strokeStyle = "#3c3c3c";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.font = "16px Nunito";
+        ctx.fillStyle = "#777";
+        ctx.fillText("Academic Director", 300, 735);
+
+        // Date
+        const today = new Date();
+        const dateStr = today.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        ctx.font = "bold 20px Nunito";
+        ctx.fillStyle = "#3c3c3c";
+        ctx.fillText(dateStr, 900, 700);
+        ctx.beginPath();
+        ctx.moveTo(800, 710);
+        ctx.lineTo(1000, 710);
+        ctx.stroke();
+        ctx.font = "16px Nunito";
+        ctx.fillStyle = "#777";
+        ctx.fillText("Date of Issue", 900, 735);
+
+        // QR Code & Validation
+        const validateUrl = `${VALIDATE_BASE_URL}?id=${s.certId}`;
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(validateUrl)}`;
+        const qr = new Image();
+        qr.crossOrigin = "anonymous";
+        qr.onload = () => {
+          ctx.drawImage(qr, 80, 650, 100, 100);
+          ctx.textAlign = "left";
+          ctx.font = "bold 14px Nunito";
+          ctx.fillStyle = "#777";
+          ctx.fillText(`ID: ${s.certId}`, 200, 700);
+          // ctx.fillText("Scan to verify", 250, 720);
+
+          const link = document.createElement("a");
+          link.download = `MentoraCert_${s.name.replace(/\s+/g, "_")}.png`;
+          link.href = canvas.toDataURL();
+          link.click();
+        };
+        qr.src = qrUrl;
+      }
+
+      window.onload = () => {
+        // Cek apakah sudah login (misal via session storage, tapi untuk saat ini tampilkan login)
+        document.getElementById("admin-login").classList.remove("hidden");
+      };
+    </script>
+  </body>
+</html>
