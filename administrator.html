@@ -2,6 +2,7 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Superadmin - Mentora.id</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -9,7 +10,7 @@
       rel="stylesheet"
     />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;700;800&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;700;800;900&display=swap");
       body {
         font-family: "Nunito", sans-serif;
         background-color: #f4f7f6;
@@ -29,10 +30,10 @@
       }
     </style>
   </head>
-  <body class="p-8">
+  <body class="p-4 md:p-8">
     <!-- LOGIN ADMIN -->
-    <div id="admin-login" class="max-w-md mx-auto glass p-8 mt-20 text-center">
-      <h2 class="text-3xl font-extrabold text-gray-800 mb-6">
+    <div id="admin-login" class="max-w-md mx-auto glass p-6 md:p-8 mt-10 md:mt-20 text-center">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6">
         <i class="fa-solid fa-shield-halved text-[#1cb0f6]"></i> Superadmin
       </h2>
       <input
@@ -52,37 +53,37 @@
     <!-- DASHBOARD ADMIN -->
     <div id="admin-dashboard" class="max-w-6xl mx-auto hidden">
       <header
-        class="flex justify-between items-center mb-10 glass p-6 shadow-sm"
+        class="flex flex-col sm:flex-row justify-between items-center mb-6 md:mb-10 glass p-4 md:p-6 shadow-sm gap-4"
       >
-        <div class="text-2xl font-black text-[#1cb0f6] tracking-tighter">
+        <div class="text-xl md:text-2xl font-black text-[#1cb0f6] tracking-tighter text-center sm:text-left">
           MENTORA<span class="text-[#58cc02]">.ID</span> ADMIN
         </div>
-        <div class="flex gap-4">
+        <div class="flex flex-wrap justify-center gap-3 md:gap-4 w-full sm:w-auto">
           <button
             onclick="loadData()"
-            class="btn-chunky bg-gray-100 border-gray-300 py-2 px-6 rounded-xl font-bold text-gray-600"
+            class="flex-1 sm:flex-none btn-chunky bg-gray-100 border-gray-300 py-2 px-4 md:px-6 rounded-xl font-bold text-gray-600 text-sm md:text-base"
           >
             <i class="fa-solid fa-sync"></i> Refresh
           </button>
           <button
             onclick="logoutAdmin()"
-            class="btn-chunky bg-red-100 border-red-300 text-red-600 py-2 px-6 rounded-xl font-bold"
+            class="flex-1 sm:flex-none btn-chunky bg-red-100 border-red-300 text-red-600 py-2 px-4 md:px-6 rounded-xl font-bold text-sm md:text-base"
           >
             <i class="fa-solid fa-power-off"></i> Keluar
           </button>
         </div>
       </header>
 
-      <div class="glass p-8 shadow-sm overflow-x-auto">
-        <table class="w-full text-left">
+      <div class="glass p-4 md:p-8 shadow-sm overflow-x-auto w-full">
+        <table class="w-full text-left min-w-[600px]">
           <thead
             class="text-gray-400 uppercase text-xs tracking-widest border-b-2"
           >
             <tr>
-              <th class="pb-4">Nama Siswa</th>
-              <th class="pb-4">Status</th>
-              <th class="pb-4">Skor</th>
-              <th class="pb-4 text-right">Tindakan</th>
+              <th class="pb-4 px-2">Nama Siswa</th>
+              <th class="pb-4 px-2">Status</th>
+              <th class="pb-4 px-2">Skor</th>
+              <th class="pb-4 px-2 text-right">Tindakan</th>
             </tr>
           </thead>
           <tbody id="siswa-table" class="divide-y"></tbody>
@@ -93,23 +94,23 @@
     <!-- Modal Review -->
     <div
       id="review-modal"
-      class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50"
+      class="fixed inset-0 bg-black/60 hidden flex items-center justify-center p-4 z-50 transition-opacity"
     >
       <div
-        class="bg-white w-full max-w-2xl rounded-3xl p-8 max-h-[80vh] overflow-y-auto"
+        class="bg-white w-full max-w-2xl rounded-2xl md:rounded-3xl p-5 md:p-8 max-h-[90vh] md:max-h-[80vh] overflow-y-auto"
       >
-        <h3 class="text-2xl font-bold mb-6">Peninjauan Jawaban Manual</h3>
-        <div id="review-content" class="space-y-6"></div>
-        <div class="mt-8 flex gap-4">
+        <h3 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-800">Peninjauan Jawaban Manual</h3>
+        <div id="review-content" class="space-y-4 md:space-y-6"></div>
+        <div class="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 md:gap-4">
           <button
             onclick="submitFinalReview()"
-            class="flex-grow btn-chunky bg-[#58cc02] border-[#46a302] text-white py-3 rounded-2xl font-bold"
+            class="w-full sm:flex-grow btn-chunky bg-[#58cc02] border-[#46a302] text-white py-3 rounded-2xl font-bold"
           >
             Finalisasi Skor
           </button>
           <button
             onclick="closeModal()"
-            class="btn-chunky bg-gray-200 border-gray-300 py-3 px-8 rounded-2xl font-bold text-gray-700"
+            class="w-full sm:w-auto btn-chunky bg-gray-200 border-gray-300 py-3 px-8 rounded-2xl font-bold text-gray-700"
           >
             Batal
           </button>
@@ -159,29 +160,29 @@
           if (data.status === "success" && data.siswa.length > 0) {
             data.siswa.reverse().forEach((s) => {
               let action = "-";
-              let statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-gray-100 font-bold text-gray-600">${s.status}</span>`;
+              let statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-gray-100 font-bold text-gray-600 whitespace-nowrap">${s.status}</span>`;
               let scoreDisplay = `<span class="text-gray-400">-</span>`;
 
               if (s.status === "nonaktif") {
-                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-orange-100 text-orange-600 font-bold">Menunggu</span>`;
+                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-orange-100 text-orange-600 font-bold whitespace-nowrap">Menunggu</span>`;
                 action = `<button onclick="activate('${s.email}')" class="text-blue-500 font-bold hover:underline">Aktifkan</button>`;
               } else if (s.status === "aktif") {
-                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-blue-100 text-blue-600 font-bold">Sedang Tes</span>`;
+                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-blue-100 text-blue-600 font-bold whitespace-nowrap">Sedang Tes</span>`;
               } else if (s.status === "waiting_review") {
-                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-purple-100 text-purple-600 font-bold">Perlu Review</span>`;
-                action = `<button onclick="openReview('${s.email}', '${s.name}')" class="btn-chunky bg-purple-500 border-purple-700 text-white px-4 py-2 rounded-xl font-bold text-sm">Review Jawaban</button>`;
+                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-purple-100 text-purple-600 font-bold whitespace-nowrap">Perlu Review</span>`;
+                action = `<button onclick="openReview('${s.email}', '${s.name.replace(/'/g, "\\'")}')" class="btn-chunky bg-purple-500 border-purple-700 text-white px-3 md:px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap">Review Jawaban</button>`;
               } else if (s.status === "completed") {
-                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-green-100 text-green-600 font-bold">Selesai</span>`;
-                scoreDisplay = `<span class="font-black text-[#1cb0f6] text-xl">${s.score}</span>`;
-                action = `<button onclick="downloadCert('${encodeURIComponent(JSON.stringify(s))}')" class="text-green-500 font-bold hover:underline"><i class="fa-solid fa-download"></i> E-Cert</button>`;
+                statusBadge = `<span class="text-xs px-3 py-1 rounded-full bg-green-100 text-green-600 font-bold whitespace-nowrap">Selesai</span>`;
+                scoreDisplay = `<span class="font-black text-[#1cb0f6] text-lg md:text-xl">${s.score}</span>`;
+                action = `<button onclick="downloadCert('${encodeURIComponent(JSON.stringify(s))}')" class="text-green-500 font-bold hover:underline whitespace-nowrap"><i class="fa-solid fa-download"></i> E-Cert</button>`;
               }
 
               table.innerHTML += `
                         <tr class="py-4 hover:bg-gray-50 transition-colors">
-                            <td class="py-4 pl-2 font-bold text-gray-800">${s.name}<br><span class="text-xs font-normal text-gray-400">${s.email} • ${s.school}</span></td>
-                            <td class="py-4">${statusBadge}</td>
-                            <td class="py-4">${scoreDisplay}</td>
-                            <td class="py-4 pr-2 text-right">${action}</td>
+                            <td class="py-4 px-2 font-bold text-gray-800 text-sm md:text-base">${s.name}<br><span class="text-xs font-normal text-gray-400 break-words">${s.email} • ${s.school}</span></td>
+                            <td class="py-4 px-2">${statusBadge}</td>
+                            <td class="py-4 px-2">${scoreDisplay}</td>
+                            <td class="py-4 px-2 text-right">${action}</td>
                         </tr>`;
             });
           } else {
@@ -231,14 +232,21 @@
             const userAns = userAnsObj ? userAnsObj.jawaban_user : null;
 
             if (q.correct === "MANUAL") {
+              // Siapkan element gambar jika ada di dalam JSON soal
+              let imageHtml = "";
+              if (q.image) {
+                imageHtml = `<div class="mb-4 text-center"><img src="${q.image}" alt="${q.imageAlt || 'Soal Gambar'}" class="inline-block max-w-full h-auto max-h-56 rounded-lg shadow-sm border border-gray-200 object-cover" /></div>`;
+              }
+
               // Tampilkan untuk dinilai manual
               content.innerHTML += `
-                        <div class="bg-gray-50 p-5 rounded-2xl border-2 border-gray-100">
+                        <div class="bg-gray-50 p-4 md:p-5 rounded-2xl border-2 border-gray-100">
                             <p class="font-bold text-gray-500 text-sm mb-3">PERTANYAAN: ${q.instruction} ${q.question || ""}</p>
-                            <div class="bg-white p-4 rounded-xl border border-gray-200 mb-4 shadow-inner">
+                            ${imageHtml}
+                            <div class="bg-white p-3 md:p-4 rounded-xl border border-gray-200 mb-4 shadow-inner">
                                 <p class="text-gray-800 whitespace-pre-wrap">${userAns || '<span class="italic text-gray-400">[Tidak ada jawaban]</span>'}</p>
                             </div>
-                            <div class="flex gap-6 border-t pt-4 border-gray-200">
+                            <div class="flex gap-4 md:gap-6 border-t pt-4 border-gray-200">
                                 <label class="flex items-center gap-2 font-bold text-green-600 cursor-pointer">
                                     <input type="radio" name="q_${q.id}" value="1" class="w-5 h-5 accent-green-600"> BENAR
                                 </label>
@@ -314,6 +322,16 @@
         document.getElementById("review-modal").classList.add("hidden");
       }
 
+      function getCEFRLevel(score) {
+        const s = parseInt(score) || 0;
+        if (s >= 140) return "C2";
+        if (s >= 120) return "C1";
+        if (s >= 90) return "B2";
+        if (s >= 60) return "B1";
+        if (s >= 35) return "A2";
+        return "A1";
+      }
+
       function downloadCert(dataStr) {
         const s = JSON.parse(decodeURIComponent(dataStr));
         const canvas = document.createElement("canvas");
@@ -372,7 +390,7 @@
         ctx.fillStyle = "#3c3c3c";
         ctx.font = "22px Nunito";
         ctx.fillText(
-          `For successfully completing the TOEFL Prediction Test`,
+          `For successfully completing the English Prediction Test`,
           600,
           470,
         );
@@ -382,25 +400,48 @@
           505,
         );
 
-        // Skor Gold Badge
+        // --- BADGE SECTION ---
+        const cefrLevel = getCEFRLevel(s.score);
+
+        // 1. Skor Gold Badge (Kiri)
         ctx.fillStyle = "#FFD700";
         ctx.beginPath();
-        ctx.arc(600, 620, 85, 0, Math.PI * 2);
+        ctx.arc(520, 620, 85, 0, Math.PI * 2);
         ctx.fill();
         // Inner circle
         ctx.strokeStyle = "#fff";
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.arc(600, 620, 75, 0, Math.PI * 2);
+        ctx.arc(520, 620, 75, 0, Math.PI * 2);
         ctx.stroke();
 
         ctx.fillStyle = "#fff";
         ctx.font = "900 50px Nunito";
-        ctx.fillText(s.score, 600, 638);
+        ctx.fillText(s.score, 520, 638);
         ctx.font = "bold 16px Nunito";
-        ctx.fillText("SCORE", 600, 585);
+        ctx.fillText("SCORE", 520, 585);
 
-        // Tanda Tangan (Dummy)
+        // 2. CEFR Level Badge (Kanan)
+        ctx.fillStyle = "#1cb0f6";
+        ctx.beginPath();
+        ctx.arc(680, 620, 85, 0, Math.PI * 2);
+        ctx.fill();
+        // Inner circle
+        ctx.strokeStyle = "#fff";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(680, 620, 75, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = "#fff";
+        ctx.font = "900 50px Nunito";
+        ctx.fillText(cefrLevel, 680, 638);
+        ctx.font = "bold 16px Nunito";
+        ctx.fillText("CEFR LEVEL", 680, 585);
+        // ----------------------
+
+        // Tanda Tangan
+        ctx.textAlign = "center";
         ctx.fillStyle = "#3c3c3c";
         ctx.font = 'italic 40px "Playfair Display"';
         ctx.fillText("Mentora.id", 300, 680);
@@ -443,7 +484,6 @@
           ctx.font = "bold 14px Nunito";
           ctx.fillStyle = "#777";
           ctx.fillText(`ID: ${s.certId}`, 200, 700);
-          // ctx.fillText("Scan to verify", 250, 720);
 
           const link = document.createElement("a");
           link.download = `MentoraCert_${s.name.replace(/\s+/g, "_")}.png`;
@@ -454,7 +494,6 @@
       }
 
       window.onload = () => {
-        // Cek apakah sudah login (misal via session storage, tapi untuk saat ini tampilkan login)
         document.getElementById("admin-login").classList.remove("hidden");
       };
     </script>
