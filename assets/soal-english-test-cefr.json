@@ -1,0 +1,1405 @@
+[
+  {
+    "id": "q1",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata-kata bahasa Inggris yang benar dari daftar berikut (Real word vs Fake word):",
+    "words": ["apple", "splof", "table", "grindle", "happy", "tromp", "yellow", "snark"],
+    "correct": ["apple", "table", "happy", "yellow"]
+  },
+  {
+    "id": "q2",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata-kata bahasa Inggris yang benar dari daftar berikut:",
+    "words": ["dog", "cat", "blook", "water", "frip", "bread", "school", "vost"],
+    "correct": ["dog", "cat", "water", "bread", "school"]
+  },
+  {
+    "id": "q3",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi bagian yang rumpang dalam kalimat berikut:",
+    "text": "I _____ to school every day by bus.",
+    "options": ["go", "goes", "going", "gone"],
+    "correct": "go"
+  },
+  {
+    "id": "q4",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi bagian yang rumpang dalam kalimat berikut:",
+    "text": "My sister _____ a very smart girl.",
+    "options": ["am", "is", "are", "be"],
+    "correct": "is"
+  },
+  {
+    "id": "q5",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Dengarkan audio berikut dan ketik ulang apa yang Anda dengar:",
+    "audioText": "The weather is very nice today.",
+    "correct": "The weather is very nice today."
+  },
+  {
+    "id": "q6",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Dengarkan audio berikut dan ketik ulang apa yang Anda dengar:",
+    "audioText": "Where is the nearest post office?",
+    "correct": "Where is the nearest post office?"
+  },
+  {
+    "id": "q7",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca teks pendek ini dan jawab pertanyaan:",
+    "text": "Sarah is ten years old. She lives in a small house with her parents and a big dog named Buster.",
+    "question": "What is the name of Sarah's dog?",
+    "options": ["Sarah", "Buster", "Parent", "Small"],
+    "correct": "Buster"
+  },
+  {
+    "id": "q8",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Dengarkan kata berikut, lalu pilih ejaan yang benar:",
+    "audioText": "Friend",
+    "options": ["Freind", "Friend", "Frand", "Frend"],
+    "correct": "Friend"
+  },
+  {
+    "id": "q9",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Tulis satu atau dua kalimat untuk mendeskripsikan gambar ini:",
+    "image": "https://predictest.mentora.sch.id/assets/img/kucing.png",
+    "imageAlt": "Seekor kucing sedang tidur di atas sofa",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q10",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata-kata bahasa Inggris yang benar:",
+    "words": ["mother", "father", "zibble", "sister", "brother", "flomp", "family", "cramt"],
+    "correct": ["mother", "father", "sister", "brother", "family"]
+  },
+  {
+    "id": "q11",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi bagian yang rumpang:",
+    "text": "I have _____ orange and two apples in my bag.",
+    "options": ["a", "an", "the", "some"],
+    "correct": "an"
+  },
+  {
+    "id": "q12",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi bagian yang rumpang:",
+    "text": "What _____ you doing right now?",
+    "options": ["am", "is", "are", "do"],
+    "correct": "are"
+  },
+  {
+    "id": "q13",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang apa yang Anda dengar:",
+    "audioText": "I like to eat pizza for dinner.",
+    "correct": "I like to eat pizza for dinner."
+  },
+  {
+    "id": "q14",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Pilih ejaan yang benar:",
+    "audioText": "Yellow",
+    "options": ["Yelow", "Yellow", "Yallow", "Yello"],
+    "correct": "Yellow"
+  },
+  {
+    "id": "q15",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "The sky is blue and the sun is bright. It is a perfect day for a picnic in the park.",
+    "question": "What color is the sky?",
+    "options": ["Green", "Red", "Blue", "Yellow"],
+    "correct": "Blue"
+  },
+  {
+    "id": "q16",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar ini:",
+    "image": "https://predictest.mentora.sch.id/assets/img/bocil.png",
+    "imageAlt": "Seorang anak laki-laki sedang bersepeda di taman",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q17",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata yang benar:",
+    "words": ["run", "jump", "skrit", "swim", "dance", "ploke", "sing", "slon"],
+    "correct": ["run", "jump", "swim", "dance", "sing"]
+  },
+  {
+    "id": "q18",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "There _____ five books on the table.",
+    "options": ["is", "are", "am", "be"],
+    "correct": "are"
+  },
+  {
+    "id": "q19",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "Please open the window.",
+    "correct": "Please open the window."
+  },
+  {
+    "id": "q20",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "My father works in an office. He goes to work at 8 AM and comes home at 5 PM.",
+    "question": "What time does the father come home?",
+    "options": ["8 AM", "5 PM", "8 PM", "5 AM"],
+    "correct": "5 PM"
+  },
+  {
+    "id": "q21",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["Monday", "Tuesday", "Fridit", "Sunday", "Work", "Play", "Drazz", "Time"],
+    "correct": ["Monday", "Tuesday", "Sunday", "Work", "Play", "Time"]
+  },
+  {
+    "id": "q22",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "I _____ a new book yesterday.",
+    "options": ["buy", "buys", "bought", "buying"],
+    "correct": "bought"
+  },
+  {
+    "id": "q23",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Morning",
+    "options": ["Morrning", "Morning", "Morninge", "Morrninge"],
+    "correct": "Morning"
+  },
+  {
+    "id": "q24",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "How _____ is this shirt?",
+    "options": ["many", "much", "old", "far"],
+    "correct": "much"
+  },
+  {
+    "id": "q25",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/kopi.png",
+    "imageAlt": "Secangkir kopi hangat di atas meja kayu",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q26",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Level A2 - Pilih kata-kata bahasa Inggris yang benar:",
+    "words": ["mountain", "river", "glamp", "forest", "ocean", "triff", "valley", "plint"],
+    "correct": ["mountain", "river", "forest", "ocean", "valley"]
+  },
+  {
+    "id": "q27",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Level A2 - Isi bagian rumpang:",
+    "text": "If it rains tomorrow, we _____ stay at home.",
+    "options": ["will", "would", "shall", "should"],
+    "correct": "will"
+  },
+  {
+    "id": "q28",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Level A2 - Ketik ulang:",
+    "audioText": "She is interested in learning how to play the piano.",
+    "correct": "She is interested in learning how to play the piano."
+  },
+  {
+    "id": "q29",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Level A2 - Baca teks:",
+    "text": "London is the capital of the United Kingdom. It is famous for its history, museums, and the Big Ben clock tower.",
+    "question": "What is London famous for?",
+    "options": ["Beaches", "Mountains", "History and museums", "Deserts"],
+    "correct": "History and museums"
+  },
+  {
+    "id": "q30",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Level A2 - Ejaan benar:",
+    "audioText": "Library",
+    "options": ["Libery", "Library", "Librery", "Libray"],
+    "correct": "Library"
+  },
+  {
+    "id": "q31",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["careful", "slowly", "flim", "quickly", "happy", "blant", "danger", "clop"],
+    "correct": ["careful", "slowly", "quickly", "happy", "danger"]
+  },
+  {
+    "id": "q32",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "Have you ever _____ to Japan?",
+    "options": ["be", "being", "been", "was"],
+    "correct": "been"
+  },
+  {
+    "id": "q33",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "I forgot to bring my umbrella this morning.",
+    "correct": "I forgot to bring my umbrella this morning."
+  },
+  {
+    "id": "q34",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "Exercise is good for your health. You should try to walk at least 30 minutes every day to stay fit.",
+    "question": "How long should you walk every day?",
+    "options": ["10 minutes", "30 minutes", "1 hour", "2 hours"],
+    "correct": "30 minutes"
+  },
+  {
+    "id": "q35",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/masak.png",
+    "imageAlt": "Seseorang sedang memasak di dapur",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q36",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["doctor", "teacher", "nurse", "pilot", "dentist", "froom", "farmer", "glarp"],
+    "correct": ["doctor", "teacher", "nurse", "pilot", "dentist", "farmer"]
+  },
+  {
+    "id": "q37",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "This movie is _____ than the one we saw last week.",
+    "options": ["good", "better", "best", "gooder"],
+    "correct": "better"
+  },
+  {
+    "id": "q38",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The train leaves the station at seven o'clock sharp.",
+    "correct": "The train leaves the station at seven o'clock sharp."
+  },
+  {
+    "id": "q39",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Beautiful",
+    "options": ["Beautifull", "Beautiful", "Beatiful", "Bautiful"],
+    "correct": "Beautiful"
+  },
+  {
+    "id": "q40",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "Coffee is one of the most popular drinks in the world. Many people drink it in the morning to feel more energetic.",
+    "question": "When do many people drink coffee?",
+    "options": ["At night", "In the morning", "Before sleep", "In the afternoon"],
+    "correct": "In the morning"
+  },
+  {
+    "id": "q41",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["kitchen", "bedroom", "bathroom", "garden", "garage", "slift", "livingroom", "plank"],
+    "correct": ["kitchen", "bedroom", "bathroom", "garden", "garage", "livingroom"]
+  },
+  {
+    "id": "q42",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "I am looking forward to _____ you again.",
+    "options": ["see", "sees", "seeing", "saw"],
+    "correct": "seeing"
+  },
+  {
+    "id": "q43",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "Could you please pass me the salt?",
+    "correct": "Could you please pass me the salt?"
+  },
+  {
+    "id": "q44",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/hujan.png",
+    "imageAlt": "Hujan deras di jalan raya kota",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q45",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["computer", "keyboard", "mouse", "screen", "laptop", "glint", "printer", "smolt"],
+    "correct": ["computer", "keyboard", "mouse", "screen", "laptop", "printer"]
+  },
+  {
+    "id": "q46",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "He _____ to the gym three times a week.",
+    "options": ["go", "goes", "going", "gone"],
+    "correct": "goes"
+  },
+  {
+    "id": "q47",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Environment",
+    "options": ["Enviroment", "Environment", "Enveronment", "Envirenment"],
+    "correct": "Environment"
+  },
+  {
+    "id": "q48",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "The Amazon rainforest produces 20% of the Earth's oxygen. It is home to thousands of different species of animals and plants.",
+    "question": "How much of Earth's oxygen does the Amazon produce?",
+    "options": ["10%", "20%", "50%", "100%"],
+    "correct": "20%"
+  },
+  {
+    "id": "q49",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "We decided to go for a walk despite the rain.",
+    "correct": "We decided to go for a walk despite the rain."
+  },
+  {
+    "id": "q50",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/rapat.png",
+    "imageAlt": "Sekelompok orang sedang rapat di kantor",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q51",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Level B1 - Pilih kata-kata bahasa Inggris yang benar:",
+    "words": ["achievement", "procrastinate", "glimplify", "subsequent", "flurd", "maintenance", "drastic", "clurp"],
+    "correct": ["achievement", "procrastinate", "subsequent", "maintenance", "drastic"]
+  },
+  {
+    "id": "q52",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Level B1 - Isi bagian rumpang:",
+    "text": "She wouldn't have been late if she _____ the earlier train.",
+    "options": ["take", "took", "had taken", "has taken"],
+    "correct": "had taken"
+  },
+  {
+    "id": "q53",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Level B1 - Ketik ulang:",
+    "audioText": "Effective communication is essential for teamwork success.",
+    "correct": "Effective communication is essential for teamwork success."
+  },
+  {
+    "id": "q54",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Level B1 - Baca teks:",
+    "text": "The industrial revolution was a period of scientific and technological development in the 18th century that transformed rural societies into urban ones.",
+    "question": "When did the industrial revolution occur?",
+    "options": ["17th century", "18th century", "19th century", "20th century"],
+    "correct": "18th century"
+  },
+  {
+    "id": "q55",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Level B1 - Ejaan benar:",
+    "audioText": "Accommodation",
+    "options": ["Acomodation", "Accomodation", "Accommodation", "Acommodation"],
+    "correct": "Accommodation"
+  },
+  {
+    "id": "q56",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["strategy", "complex", "fringle", "system", "vibrant", "drane", "justice", "smolt"],
+    "correct": ["strategy", "complex", "system", "vibrant", "justice"]
+  },
+  {
+    "id": "q57",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "The manager apologized _____ the delay in the project.",
+    "options": ["for", "about", "to", "with"],
+    "correct": "for"
+  },
+  {
+    "id": "q58",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "Please make sure to back up your files regularly.",
+    "correct": "Please make sure to back up your files regularly."
+  },
+  {
+    "id": "q59",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "Renewable energy, such as solar and wind power, is becoming more popular because it is cleaner than burning fossil fuels.",
+    "question": "Why is renewable energy becoming popular?",
+    "options": ["It is cheaper", "It is cleaner", "It is louder", "It is harder to use"],
+    "correct": "It is cleaner"
+  },
+  {
+    "id": "q60",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/bandara.png",
+    "imageAlt": "Sebuah bandara yang dipenuhi calon penumpang",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q61",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["evidence", "theory", "vord", "analysis", "result", "driss", "factor", "vane"],
+    "correct": ["evidence", "theory", "analysis", "result", "factor"]
+  },
+  {
+    "id": "q62",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "I'm not used to _____ up so early in the morning.",
+    "options": ["get", "gets", "getting", "got"],
+    "correct": "getting"
+  },
+  {
+    "id": "q63",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The results of the study were quite unexpected.",
+    "correct": "The results of the study were quite unexpected."
+  },
+  {
+    "id": "q64",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Necessary",
+    "options": ["Necesary", "Neccessary", "Necessary", "Nesesary"],
+    "correct": "Necessary"
+  },
+  {
+    "id": "q65",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "Artificial intelligence is changing the way we live and work by automating tasks that were previously done by humans.",
+    "question": "How is AI changing our lives?",
+    "options": ["By making us work more", "By automating tasks", "By creating more jobs", "By removing technology"],
+    "correct": "By automating tasks"
+  },
+  {
+    "id": "q66",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["economy", "inflation", "blunt", "market", "trade", "clorp", "finance", "spiff"],
+    "correct": ["economy", "inflation", "market", "trade", "finance"]
+  },
+  {
+    "id": "q67",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "The house _____ built in 1920 by my grandfather.",
+    "options": ["was", "is", "were", "has"],
+    "correct": "was"
+  },
+  {
+    "id": "q68",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "Technology has significantly impacted global communication.",
+    "correct": "Technology has significantly impacted global communication."
+  },
+  {
+    "id": "q69",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/lari.png",
+    "imageAlt": "Seorang atlet sedang berlari di lintasan",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q70",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["culture", "diverse", "glampy", "tradition", "ethnic", "vord", "custom", "fluff"],
+    "correct": ["culture", "diverse", "tradition", "ethnic", "custom"]
+  },
+  {
+    "id": "q71",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "I suggest _____ a doctor if the pain continues.",
+    "options": ["see", "to see", "seeing", "saw"],
+    "correct": "seeing"
+  },
+  {
+    "id": "q72",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Restaurant",
+    "options": ["Restarant", "Restaraunt", "Restaurant", "Resterant"],
+    "correct": "Restaurant"
+  },
+  {
+    "id": "q73",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "Space exploration allows us to understand our place in the universe and might provide resources for the future.",
+    "question": "What is one goal of space exploration?",
+    "options": ["Destroy planets", "Understand the universe", "Stop global warming", "Build more cars"],
+    "correct": "Understand the universe"
+  },
+  {
+    "id": "q74",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The conference has been postponed until next month.",
+    "correct": "The conference has been postponed until next month."
+  },
+  {
+    "id": "q75",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/salju.png",
+    "imageAlt": "Pemandangan pegunungan bersalju di pagi hari",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q76",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["potential", "challenge", "glant", "creative", "solution", "plamp", "network", "slif"],
+    "correct": ["potential", "challenge", "creative", "solution", "network"]
+  },
+  {
+    "id": "q77",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "Neither of the candidates _____ qualified for the position.",
+    "options": ["is", "are", "be", "am"],
+    "correct": "is"
+  },
+  {
+    "id": "q78",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Knowledge",
+    "options": ["Knowlege", "Knowledge", "Knowledje", "Knowlege"],
+    "correct": "Knowledge"
+  },
+  {
+    "id": "q79",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "The Great Barrier Reef is the world's largest coral reef system. It is composed of over 2,900 individual reefs.",
+    "question": "How many individual reefs are in the Great Barrier Reef?",
+    "options": ["900", "2,900", "5,000", "10,000"],
+    "correct": "2,900"
+  },
+  {
+    "id": "q80",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "I'll let you know when the package arrives.",
+    "correct": "I'll let you know when the package arrives."
+  },
+  {
+    "id": "q81",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Level B2 - Pilih kata-kata bahasa Inggris yang benar:",
+    "words": ["ubiquitous", "pragmatic", "flosserate", "meticulous", "ephemeral", "vundicate", "ambivalent", "clant"],
+    "correct": ["ubiquitous", "pragmatic", "meticulous", "ephemeral", "ambivalent"]
+  },
+  {
+    "id": "q82",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Level B2 - Isi bagian rumpang:",
+    "text": "The government is implementing policies to _____ the impact of inflation.",
+    "options": ["mitigate", "magnify", "ignore", "calculate"],
+    "correct": "mitigate"
+  },
+  {
+    "id": "q83",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Level B2 - Ketik ulang:",
+    "audioText": "Economic stability is crucial for the long-term growth of any nation.",
+    "correct": "Economic stability is crucial for the long-term growth of any nation."
+  },
+  {
+    "id": "q84",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Level B2 - Baca teks:",
+    "text": "Psychological resilience is the ability to mentally or emotionally cope with a crisis or to return to pre-crisis status quickly.",
+    "question": "What is psychological resilience defined as?",
+    "options": ["Avoiding crisis", "Coping with crisis", "Causing a crisis", "Predicting a crisis"],
+    "correct": "Coping with crisis"
+  },
+  {
+    "id": "q85",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Level B2 - Ejaan benar:",
+    "audioText": "Occurrence",
+    "options": ["Ocurrence", "Occurance", "Occurrence", "Occurence"],
+    "correct": "Occurrence"
+  },
+  {
+    "id": "q86",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["analysis", "hypothesis", "bront", "empirical", "theory", "glast", "variable", "froom"],
+    "correct": ["analysis", "hypothesis", "empirical", "theory", "variable"]
+  },
+  {
+    "id": "q87",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "It is imperative that the employees _____ the safety guidelines.",
+    "options": ["follow", "follows", "following", "followed"],
+    "correct": "follow"
+  },
+  {
+    "id": "q88",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The scientist's hypothesis was supported by the experimental data.",
+    "correct": "The scientist's hypothesis was supported by the experimental data."
+  },
+  {
+    "id": "q89",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "Global warming is primarily caused by the increase of greenhouse gases in the atmosphere, leading to a rise in average temperatures.",
+    "question": "What is the main cause of global warming mentioned?",
+    "options": ["Volcanic eruptions", "Greenhouse gases", "Solar flares", "Ocean currents"],
+    "correct": "Greenhouse gases"
+  },
+  {
+    "id": "q90",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/labarugi.png",
+    "imageAlt": "Diagram laba rugi perusahaan yang kompleks",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q91",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["consequence", "influence", "glore", "sustainable", "resource", "plone", "environment", "vark"],
+    "correct": ["consequence", "influence", "sustainable", "resource", "environment"]
+  },
+  {
+    "id": "q92",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "Hardly _____ had I stepped outside when it started raining.",
+    "options": ["ever", "never", "only", "ever"],
+    "correct": "ever"
+  },
+  {
+    "id": "q93",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The architect presented a revolutionary design for the new library.",
+    "correct": "The architect presented a revolutionary design for the new library."
+  },
+  {
+    "id": "q94",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Maintenance",
+    "options": ["Maintainance", "Maintenance", "Maintenence", "Maintainence"],
+    "correct": "Maintenance"
+  },
+  {
+    "id": "q95",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "Urbanization is the process through which cities grow, and higher percentages of the population come to live in the city.",
+    "question": "What does urbanization describe?",
+    "options": ["City growth", "Farming decrease", "Forest expansion", "Ocean cooling"],
+    "correct": "City growth"
+  },
+  {
+    "id": "q96",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["substantial", "innovative", "flinty", "diversity", "potential", "stram", "efficiency", "vile"],
+    "correct": ["substantial", "innovative", "diversity", "potential", "efficiency"]
+  },
+  {
+    "id": "q97",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "If he _____ harder, he would have passed the exam.",
+    "options": ["studied", "had studied", "studies", "would study"],
+    "correct": "had studied"
+  },
+  {
+    "id": "q98",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "Effective leadership requires clear vision and empathy.",
+    "correct": "Effective leadership requires clear vision and empathy."
+  },
+  {
+    "id": "q99",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/energi.png",
+    "imageAlt": "Ilustrasi energi terbarukan seperti kincir angin dan panel surya",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q100",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["collaborate", "perspective", "glampy", "significant", "comprehensive", "vord", "perspective", "fluff"],
+    "correct": ["collaborate", "perspective", "significant", "comprehensive", "perspective"]
+  },
+  {
+    "id": "q101",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "The suspect denied _____ any involvement in the crime.",
+    "options": ["have", "to have", "having", "had"],
+    "correct": "having"
+  },
+  {
+    "id": "q102",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Privilege",
+    "options": ["Privilage", "Privilege", "Privelige", "Priviledge"],
+    "correct": "Privilege"
+  },
+  {
+    "id": "q103",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "Economic globalization is the increasing economic interdependence of national economies across the world through a rapid increase in cross-border movement of goods and services.",
+    "question": "What is economic globalization characterized by?",
+    "options": ["Isolation", "Interdependence", "Local markets only", "Strict borders"],
+    "correct": "Interdependence"
+  },
+  {
+    "id": "q104",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The legal system aims to ensure justice and equality for all citizens.",
+    "correct": "The legal system aims to ensure justice and equality for all citizens."
+  },
+  {
+    "id": "q105",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/ilmuwan.png",
+    "imageAlt": "Seorang ilmuwan sedang melihat melalui mikroskop",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q106",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["sustainable", "development", "clomp", "framework", "integrated", "driss", "mechanism", "vane"],
+    "correct": ["sustainable", "development", "framework", "integrated", "mechanism"]
+  },
+  {
+    "id": "q107",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "By the end of next year, we _____ the project.",
+    "options": ["will finish", "will have finished", "finish", "finished"],
+    "correct": "will have finished"
+  },
+  {
+    "id": "q108",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Hierarchy",
+    "options": ["Heirarchy", "Hierarchy", "Hiararchy", "Heirarky"],
+    "correct": "Hierarchy"
+  },
+  {
+    "id": "q109",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "Biodiversity refers to the variety of life in the world or in a particular habitat or ecosystem.",
+    "question": "What does biodiversity refer to?",
+    "options": ["Variety of life", "Single species", "Rocks and minerals", "Weather patterns"],
+    "correct": "Variety of life"
+  },
+  {
+    "id": "q110",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The team worked tirelessly to meet the tight deadline.",
+    "correct": "The team worked tirelessly to meet the tight deadline."
+  },
+  {
+    "id": "q111",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Level C1 - Pilih kata-kata bahasa Inggris yang benar:",
+    "words": ["quintessential", "paradigm", "glimplify", "subsequent", "ephemeral", "obfuscate", "drastic", "clurp"],
+    "correct": ["quintessential", "paradigm", "ephemeral", "obfuscate"]
+  },
+  {
+    "id": "q112",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Level C1 - Isi bagian rumpang:",
+    "text": "The findings were so _____ that they challenged the existing theories.",
+    "options": ["anomalous", "mundane", "redundant", "consistent"],
+    "correct": "anomalous"
+  },
+  {
+    "id": "q113",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Level C1 - Ketik ulang:",
+    "audioText": "The hypothesis must be rigorously tested through empirical observation and controlled experiments.",
+    "correct": "The hypothesis must be rigorously tested through empirical observation and controlled experiments."
+  },
+  {
+    "id": "q114",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Level C1 - Baca teks:",
+    "text": "Cognitive dissonance occurs when an individual holds two or more contradictory beliefs or values, leading to psychological discomfort.",
+    "question": "What causes psychological discomfort in cognitive dissonance?",
+    "options": ["Agreement", "Contradictory beliefs", "Physical pain", "Lack of information"],
+    "correct": "Contradictory beliefs"
+  },
+  {
+    "id": "q115",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Level C1 - Ejaan benar:",
+    "audioText": "Connoisseur",
+    "options": ["Conoiseur", "Connoisseur", "Connoiseur", "Connoiseure"],
+    "correct": "Connoisseur"
+  },
+  {
+    "id": "q116",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["plethora", "juxtaposition", "fringle", "superfluous", "aesthetic", "drane", "integrity", "smolt"],
+    "correct": ["plethora", "juxtaposition", "superfluous", "aesthetic", "integrity"]
+  },
+  {
+    "id": "q117",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "The CEO's decision was based on a _____ analysis of the market trends.",
+    "options": ["superficial", "profound", "random", "hasty"],
+    "correct": "profound"
+  },
+  {
+    "id": "q118",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "Institutional reforms are necessary to address the root causes of systemic inequality.",
+    "correct": "Institutional reforms are necessary to address the root causes of systemic inequality."
+  },
+  {
+    "id": "q119",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "The philosopher argued that morality is not absolute but rather a social construct that evolves over time.",
+    "question": "What was the philosopher's view on morality?",
+    "options": ["It is fixed", "It is a social construct", "It is biological", "It doesn't exist"],
+    "correct": "It is a social construct"
+  },
+  {
+    "id": "q120",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/lukisan.png",
+    "imageAlt": "Abstrak seni lukis dengan banyak simbol filosofis",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q121",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["meticulous", "ambivalent", "vord", "eloquent", "tenacious", "driss", "versatile", "vane"],
+    "correct": ["meticulous", "ambivalent", "eloquent", "tenacious", "versatile"]
+  },
+  {
+    "id": "q122",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "Only after the audit did the discrepancies _____ to light.",
+    "options": ["come", "came", "coming", "comes"],
+    "correct": "come"
+  },
+  {
+    "id": "q123",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The implications of this technology are both vast and unpredictable.",
+    "correct": "The implications of this technology are both vast and unpredictable."
+  },
+  {
+    "id": "q124",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Pharaoh",
+    "options": ["Pharoah", "Pharaoh", "Pharoa", "Pharoh"],
+    "correct": "Pharaoh"
+  },
+  {
+    "id": "q125",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "Quantum mechanics describes the physical properties of nature at the scale of atoms and subatomic particles.",
+    "question": "At what scale does quantum mechanics operate?",
+    "options": ["Large objects", "Atoms and subatomic particles", "Biological systems", "Planetary systems"],
+    "correct": "Atoms and subatomic particles"
+  },
+  {
+    "id": "q126",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["scrutinize", "authenticate", "blunt", "validate", "synthesize", "clorp", "augment", "spiff"],
+    "correct": ["scrutinize", "authenticate", "validate", "synthesize", "augment"]
+  },
+  {
+    "id": "q127",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "Such was the _____ of the event that it made headlines globally.",
+    "options": ["magnitude", "minimalism", "indifference", "casualness"],
+    "correct": "magnitude"
+  },
+  {
+    "id": "q128",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "A comprehensive strategy is required to mitigate the risks associated with cyberattacks.",
+    "correct": "A comprehensive strategy is required to mitigate the risks associated with cyberattacks."
+  },
+  {
+    "id": "q129",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/dewi.png",
+    "imageAlt": "Gedung pengadilan dengan patung Dewi Keadilan",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q130",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["advocate", "precedent", "glampy", "jurisdiction", "sovereignty", "vord", "legitimacy", "fluff"],
+    "correct": ["advocate", "precedent", "jurisdiction", "sovereignty", "legitimacy"]
+  },
+  {
+    "id": "q131",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "Rarely _____ we encountered such a complex problem.",
+    "options": ["have", "had", "did", "do"],
+    "correct": "have"
+  },
+  {
+    "id": "q132",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Maneuver",
+    "options": ["Manuver", "Maneuver", "Manoeuvre", "Maneuver"],
+    "correct": "Maneuver"
+  },
+  {
+    "id": "q133",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "The concept of sustainable development seeks to balance economic growth with environmental protection and social equity.",
+    "question": "What does sustainable development try to balance?",
+    "options": ["Growth and protection", "Profit and loss", "Past and future", "City and country"],
+    "correct": "Growth and protection"
+  },
+  {
+    "id": "q134",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The rapid pace of technological innovation presents both opportunities and challenges.",
+    "correct": "The rapid pace of technological innovation presents both opportunities and challenges."
+  },
+  {
+    "id": "q135",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/keramaian.png",
+    "imageAlt": "Kepadatan penduduk di kota megapolitan Asia",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q136",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Level C2 - Pilih kata-kata bahasa Inggris yang benar:",
+    "words": ["abstruse", "candid", "glore", "ineffable", "perspicacious", "plone", "sagacious", "vark"],
+    "correct": ["abstruse", "candid", "ineffable", "perspicacious", "sagacious"]
+  },
+  {
+    "id": "q137",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Level C2 - Isi bagian rumpang:",
+    "text": "The scholar's arguments were so _____ that they left little room for rebuttal.",
+    "options": ["cogent", "ambiguous", "trivial", "circuitous"],
+    "correct": "cogent"
+  },
+  {
+    "id": "q138",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Level C2 - Ketik ulang:",
+    "audioText": "The ontological argument for the existence of God has been a subject of intense philosophical debate for centuries.",
+    "correct": "The ontological argument for the existence of God has been a subject of intense philosophical debate for centuries."
+  },
+  {
+    "id": "q139",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Level C2 - Baca teks:",
+    "text": "Epistemology is the branch of philosophy concerned with the theory of knowledge, investigating its nature, origins, and limits.",
+    "question": "What is the primary focus of epistemology?",
+    "options": ["Ethics", "Nature of knowledge", "Existence of God", "Politics"],
+    "correct": "Nature of knowledge"
+  },
+  {
+    "id": "q140",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Level C2 - Ejaan benar:",
+    "audioText": "Chrysanthemum",
+    "options": ["Crysenthemum", "Chrysanthemum", "Chrisanthemum", "Chrysenthemum"],
+    "correct": "Chrysanthemum"
+  },
+  {
+    "id": "q141",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["ubiquity", "ephemeral", "flinty", "recalcitrant", "vicissitude", "stram", "magnanimous", "vile"],
+    "correct": ["ubiquity", "ephemeral", "recalcitrant", "vicissitude", "magnanimous"]
+  },
+  {
+    "id": "q142",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "Lest we _____ the mistakes of the past, we must study history carefully.",
+    "options": ["repeat", "repeats", "repeating", "repeated"],
+    "correct": "repeat"
+  },
+  {
+    "id": "q143",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The socioeconomic disparities in the region are exacerbated by the lack of infrastructure.",
+    "correct": "The socioeconomic disparities in the region are exacerbated by the lack of infrastructure."
+  },
+  {
+    "id": "q144",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/matematika.png",
+    "imageAlt": "Simbol fraktal matematika yang sangat rumit",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q145",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["esoteric", "equivocal", "glampy", "fastidious", "garrulous", "vord", "hackneyed", "fluff"],
+    "correct": ["esoteric", "equivocal", "fastidious", "garrulous", "hackneyed"]
+  },
+  {
+    "id": "q146",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "The poet's use of _____ language evoked a sense of nostalgia in the readers.",
+    "options": ["prosaic", "evocative", "pedestrian", "banal"],
+    "correct": "evocative"
+  },
+  {
+    "id": "q147",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Entrepreneur",
+    "options": ["Entrepeneur", "Entrepreneur", "Enterpreneur", "Entreprenuer"],
+    "correct": "Entrepreneur"
+  },
+  {
+    "id": "q148",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "The principle of entropy states that the total disorder of an isolated system can never decrease over time.",
+    "question": "What happens to the disorder in an isolated system according to entropy?",
+    "options": ["Decreases", "Stays the same", "Never decreases", "Vanishes"],
+    "correct": "Never decreases"
+  },
+  {
+    "id": "q149",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "Phenomenology is the philosophical study of the structures of experience and consciousness.",
+    "correct": "Phenomenology is the philosophical study of the structures of experience and consciousness."
+  },
+  {
+    "id": "q150",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/otak.png",
+    "imageAlt": "Ilustrasi neuron di otak manusia yang bercahaya",
+    "correct": "MANUAL"
+  },
+  {
+    "id": "q151",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["insidious", "invective", "clomp", "laconic", "loquacious", "driss", "mellifluous", "vane"],
+    "correct": ["insidious", "invective", "laconic", "loquacious", "mellifluous"]
+  },
+  {
+    "id": "q152",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "Were it not for the timely intervention, the situation _____ into chaos.",
+    "options": ["would have devolved", "devolved", "devolves", "will devolve"],
+    "correct": "would have devolved"
+  },
+  {
+    "id": "q153",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Questionnaire",
+    "options": ["Questionaire", "Questionnaire", "Questionairy", "Questionnaire"],
+    "correct": "Questionnaire"
+  },
+  {
+    "id": "q154",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "The Heisenberg uncertainty principle states that the more precisely the position of a particle is determined, the less precisely its momentum can be known.",
+    "question": "What is the relationship between position and momentum in this principle?",
+    "options": ["Both known perfectly", "Inversely related precision", "Directly related precision", "Neither can be known"],
+    "correct": "Inversely related precision"
+  },
+  {
+    "id": "q155",
+    "type": "listening_dictation",
+    "section": "Listening",
+    "instruction": "Ketik ulang:",
+    "audioText": "The juxtaposition of the ancient and the modern created a striking visual contrast.",
+    "correct": "The juxtaposition of the ancient and the modern created a striking visual contrast."
+  },
+  {
+    "id": "q156",
+    "type": "reading_vocab",
+    "section": "Reading",
+    "instruction": "Pilih kata benar:",
+    "words": ["nefarious", "obsequious", "blamp", "palliative", "quixotic", "glest", "recondite", "slon"],
+    "correct": ["nefarious", "obsequious", "palliative", "quixotic", "recondite"]
+  },
+  {
+    "id": "q157",
+    "type": "reading_fill",
+    "section": "Reading",
+    "instruction": "Isi rumpang:",
+    "text": "He remains _____ of the fact that his actions have far-reaching consequences.",
+    "options": ["oblivious", "aware", "conscious", "mindful"],
+    "correct": "oblivious"
+  },
+  {
+    "id": "q158",
+    "type": "listening_select",
+    "section": "Listening",
+    "instruction": "Ejaan benar:",
+    "audioText": "Miscellaneous",
+    "options": ["Miscelaneous", "Miscellaneous", "Miscellanious", "Misscellaneous"],
+    "correct": "Miscellaneous"
+  },
+  {
+    "id": "q159",
+    "type": "reading_comp",
+    "section": "Reading",
+    "instruction": "Baca dan jawab:",
+    "text": "In the realm of international relations, realism posits that states act primarily in their own self-interest to ensure survival in an anarchic system.",
+    "question": "What is the primary motivation of states according to realism?",
+    "options": ["Altruism", "Self-interest", "Cooperation", "Global peace"],
+    "correct": "Self-interest"
+  },
+  {
+    "id": "q160",
+    "type": "writing_image",
+    "section": "Writing",
+    "instruction": "Deskripsikan gambar:",
+    "image": "https://predictest.mentora.sch.id/assets/img/keadilansosial.png",
+    "imageAlt": "Ilustrasi konsep keadilan sosial yang kompleks",
+    "correct": "MANUAL"
+  }
+]
