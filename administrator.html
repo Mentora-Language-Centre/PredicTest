@@ -32,7 +32,10 @@
   </head>
   <body class="p-4 md:p-8">
     <!-- LOGIN ADMIN -->
-    <div id="admin-login" class="max-w-md mx-auto glass p-6 md:p-8 mt-10 md:mt-20 text-center">
+    <div
+      id="admin-login"
+      class="max-w-md mx-auto glass p-6 md:p-8 mt-10 md:mt-20 text-center"
+    >
       <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6">
         <i class="fa-solid fa-shield-halved text-[#1cb0f6]"></i> Superadmin
       </h2>
@@ -55,10 +58,14 @@
       <header
         class="flex flex-col sm:flex-row justify-between items-center mb-6 md:mb-10 glass p-4 md:p-6 shadow-sm gap-4"
       >
-        <div class="text-xl md:text-2xl font-black text-[#1cb0f6] tracking-tighter text-center sm:text-left">
+        <div
+          class="text-xl md:text-2xl font-black text-[#1cb0f6] tracking-tighter text-center sm:text-left"
+        >
           MENTORA<span class="text-[#58cc02]">.ID</span> ADMIN
         </div>
-        <div class="flex flex-wrap justify-center gap-3 md:gap-4 w-full sm:w-auto">
+        <div
+          class="flex flex-wrap justify-center gap-3 md:gap-4 w-full sm:w-auto"
+        >
           <button
             onclick="loadData()"
             class="flex-1 sm:flex-none btn-chunky bg-gray-100 border-gray-300 py-2 px-4 md:px-6 rounded-xl font-bold text-gray-600 text-sm md:text-base"
@@ -99,7 +106,9 @@
       <div
         class="bg-white w-full max-w-2xl rounded-2xl md:rounded-3xl p-5 md:p-8 max-h-[90vh] md:max-h-[80vh] overflow-y-auto"
       >
-        <h3 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-800">Peninjauan Jawaban Manual</h3>
+        <h3 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-800">
+          Peninjauan Jawaban Manual
+        </h3>
         <div id="review-content" class="space-y-4 md:space-y-6"></div>
         <div class="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 md:gap-4">
           <button
@@ -235,7 +244,7 @@
               // Siapkan element gambar jika ada di dalam JSON soal
               let imageHtml = "";
               if (q.image) {
-                imageHtml = `<div class="mb-4 text-center"><img src="${q.image}" alt="${q.imageAlt || 'Soal Gambar'}" class="inline-block max-w-full h-auto max-h-56 rounded-lg shadow-sm border border-gray-200 object-cover" /></div>`;
+                imageHtml = `<div class="mb-4 text-center"><img src="${q.image}" alt="${q.imageAlt || "Soal Gambar"}" class="inline-block max-w-full h-auto max-h-56 rounded-lg shadow-sm border border-gray-200 object-cover" /></div>`;
               }
 
               // Tampilkan untuk dinilai manual
@@ -350,15 +359,25 @@
         ctx.strokeRect(15, 15, 1170, 820);
 
         // Watermark / Pattern
-        ctx.globalAlpha = 0.03;
-        ctx.fillStyle = "#1cb0f6";
-        for (let i = 0; i < 10; i++) {
-          for (let j = 0; j < 8; j++) {
-            ctx.font = "bold 30px Nunito";
-            ctx.fillText("MENTORA.ID", i * 180, j * 130);
+        const logo = new Image();
+        logo.crossOrigin = "anonymous";
+        logo.src = "https://predictest.mentora.sch.id/assets/img/logo.png";
+
+        logo.onload = function () {
+          ctx.globalAlpha = 0.03;
+
+          const logoWidth = 150;
+          const logoHeight =
+            logoWidth * (logo.naturalHeight / logo.naturalWidth);
+
+          for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 8; j++) {
+              ctx.drawImage(logo, i * 180, j * 130, logoWidth, logoHeight);
+            }
           }
-        }
-        ctx.globalAlpha = 1.0;
+
+          ctx.globalAlpha = 1.0;
+        };
 
         // Logo & Header
         ctx.textAlign = "center";
@@ -456,8 +475,9 @@
         ctx.fillText("Academic Director", 300, 735);
 
         // Date
-        const today = new Date();
-        const dateStr = today.toLocaleDateString("en-US", {
+        // const today = new Date();
+        const issueDate = new Date(s.createdAt);
+        const dateStr = issueDate.toLocaleDateString("en-US", {
           year: "numeric",
           month: "long",
           day: "numeric",
